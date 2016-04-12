@@ -36,7 +36,16 @@ var app = {
                     alert(error);
                 }
             });
-        }
+        };
+
+        $('#pause').click(function () {
+            player.paused ? player.play() : player.pause();
+        });
+
+        $('#stop').click(function () {
+            player.pause();
+            player.currentTime = 0;
+        });
     },
 };
 
