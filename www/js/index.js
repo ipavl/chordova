@@ -32,18 +32,7 @@ var app = {
                 };
 
                 app.songQueue.push(songData);
-
-                // Rewrite playlist with all songs
-                playlist.innerHTML = '<ul><li>' + $.map(app.songQueue, function(obj, index){
-                    return '<button id="song-' + index + '">' + obj.artist + ' - ' + obj.title + '</button>';
-                }).join('</li><li>') + '</li></ul>';
-
-                // Reset listeners for playing songs from the playlist
-                $('button[id^="song-"]').click(function () {
-                    // Get the index for the selected song, which is after the last hyphen in the button id
-                    var index = parseInt(/[^-]*$/.exec(this.id)[0]);
-                    app.playSong(index);
-                });
+                app.createPlaylistHTML();
 
                 // TODO: Improve how the first song is played
                 if (player.paused) {
@@ -127,6 +116,35 @@ var app = {
         }
 
         return 'data:' + picture.format + ';base64,' + window.btoa(base64);
+    },
+
+    createPlaylistHTML: function () {
+        // Rewrite playlist with all songs
+        playlist.innerHTML = '<ul><li>' + $.map(app.songQueue, function (obj, index) {
+                return '<button id="song-' + index + '">' + obj.artist + ' - ' + obj.title + '</button>'
+                    + '<button id="delete-song-' + index + '">X</button>';
+            }).join('</li><li>') + '</li></ul>';
+
+        app.addPlaylistButtonListeners();
+    },
+
+    addPlaylistButtonListeners: function () {
+        // Reset listeners for playing songs from the playlist
+        $('button[id^="song-"]').click(function () {
+            // Get the index for the selected song, which is after the last hyphen in the button id
+            var index = parseInt(/[^-]*$/.exec(this.id)[0]);
+
+            app.playSong(index);
+        });
+
+        // Reset listeners for deleting songs from the playlist
+        $('button[id^="delete-song-"]').click(function () {
+            // Get the index for the selected song to delete, which is after the last hyphen in the button id
+            var index = parseInt(/[^-]*$/.exec(this.id)[0]);
+
+            app.songQueue.splice(index, 1);
+            app.createPlaylistHTML();
+        });
     },
 
     formatAudioDuration: function (seconds) {
