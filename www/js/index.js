@@ -83,6 +83,10 @@ var app = {
             }
         };
 
+        player.addEventListener('timeupdate', function () {
+            current_time.innerText = app.formatAudioDuration(player.currentTime);
+        });
+
         $('#pause').click(function () {
             player.paused ? player.play() : player.pause();
         });
@@ -123,6 +127,16 @@ var app = {
         }
 
         return 'data:' + picture.format + ';base64,' + window.btoa(base64);
+    },
+
+    formatAudioDuration: function (seconds) {
+        var minutes = Math.floor(seconds / 60);
+
+        minutes = minutes >= 10 ? minutes : '0' + minutes;
+        seconds = Math.floor(seconds % 60);
+        seconds = seconds >= 10 ? seconds : '0' + seconds;
+
+        return (isNaN(minutes) ? '--' : minutes) + ':' + (isNaN(seconds) ? '--' : seconds);
     },
 };
 
