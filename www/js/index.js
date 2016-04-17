@@ -55,6 +55,9 @@ var app = {
         np_album.innerText = songData.album;
         np_year.innerText = songData.year;
 
+        // Update the page title
+        document.title = songData.artist + ' - ' + songData.title + ' - Chordova';
+
         $('.current-song').removeClass('current-song');
         app.currentIndex = index;
         $('#song-' + app.currentIndex).addClass('current-song');
