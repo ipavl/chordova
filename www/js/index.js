@@ -76,6 +76,10 @@ var app = {
             current_time.innerText = app.formatAudioDuration(player.currentTime);
         });
 
+        player.addEventListener('ended', function () {
+            $('#next').click();
+        });
+
         $('#pause').click(function () {
             player.paused ? player.play() : player.pause();
         });
