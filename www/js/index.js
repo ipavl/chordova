@@ -82,11 +82,21 @@ var app = {
         });
 
         $('#next').click(function () {
-            app.playSong(++app.currentIndex);
+            try {
+                app.playSong(++app.currentIndex);
+            } catch (e) {
+                app.currentIndex = 0;
+                app.playSong(app.currentIndex);
+            }
         });
 
         $('#prev').click(function () {
-            app.playSong(--app.currentIndex);
+            try {
+                app.playSong(--app.currentIndex);
+            } catch (e) {
+                app.currentIndex = app.songQueue.length - 1;
+                app.playSong(app.currentIndex);
+            }
         });
     },
 
