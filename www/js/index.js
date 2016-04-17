@@ -1,6 +1,9 @@
 var jsmediatags = window.jsmediatags;
 
 var app = {
+    songQueue: [],
+    currentIndex: 0,
+
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -14,29 +17,59 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
+    addSongToQueue: function (song) {
+        jsmediatags.read(song, {
+            onSuccess: function(jsonTags) {
+                var tags = jsonTags.tags;
+
+                var songData = {
+                    'title': tags.title,
+                    'artist': tags.artist,
+                    'album': tags.album,
+                    'year': tags.year,
+                    'cover': app.createAlbumArtDataURI(tags.picture),
+                    'path': URL.createObjectURL(song)
+                };
+
+                app.songQueue.push(songData);
+
+                // Rewrite playlist with all songs
+                playlist.innerHTML = '<ul><li>' + $.map(app.songQueue, function(obj){
+                    return obj.title
+                }).join('</li><li>') + '</li></ul>';
+
+                // TODO: Improve how the first song is played
+                if (player.paused) {
+                    app.playSong(0);
+                }
+            },
+            onError: function(error) {
+                alert(error);
+            }
+        });
+    },
+
+    playSong: function (index) {
+        var songData = app.songQueue[index];
+
+        // Update the Now Playing information for the current song
+        np_cover.innerHTML = '<img src="' + songData.cover + '" />';
+        np_title.innerText = songData.title;
+        np_artist.innerText = songData.artist;
+        np_album.innerText = songData.album;
+        np_year.innerText = songData.year;
+
+        player.src = songData.path;
+        player.play();
+    },
+
     // deviceready Event Handler
     onDeviceReady: function () {
-        // Listener to play a file when it is selected
+        // Listener to add selected files to the song queue
         file_select.onchange = function() {
-            var file = this.files[0];
-            player.src = URL.createObjectURL(file);
-            player.play();
-
-            jsmediatags.read(file, {
-                onSuccess: function(jsonTags) {
-                    var tags = jsonTags.tags;
-
-                    // Update the Now Playing information
-                    np_cover.innerHTML = '<img src="' + app.createAlbumArtDataURI(tags.picture) + '" />';
-                    np_title.innerText = tags.title;
-                    np_artist.innerText = tags.artist;
-                    np_album.innerText = tags.album;
-                    np_year.innerText = tags.year;
-                },
-                onError: function(error) {
-                    alert(error);
-                }
-            });
+            for (var i = 0; i < this.files.length; i++) {
+                app.addSongToQueue(this.files[i]);
+            }
         };
 
         $('#pause').click(function () {
@@ -46,6 +79,14 @@ var app = {
         $('#stop').click(function () {
             player.pause();
             player.currentTime = 0;
+        });
+
+        $('#next').click(function () {
+            app.playSong(++app.currentIndex);
+        });
+
+        $('#prev').click(function () {
+            app.playSong(--app.currentIndex);
         });
     },
 
