@@ -5,7 +5,7 @@ var app = {
     initialize: function () {
         this.bindEvents();
     },
-    
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -27,6 +27,7 @@ var app = {
                     var tags = jsonTags.tags;
 
                     // Update the Now Playing information
+                    np_cover.innerHTML = '<img src="' + app.createAlbumArtDataURI(tags.picture) + '" />';
                     np_title.innerText = tags.title;
                     np_artist.innerText = tags.artist;
                     np_album.innerText = tags.album;
@@ -46,6 +47,20 @@ var app = {
             player.pause();
             player.currentTime = 0;
         });
+    },
+
+    createAlbumArtDataURI: function (picture) {
+        if (!picture) {
+            return '';
+        }
+
+        var base64 = '';
+        
+        for (var i = 0; i < picture.data.length; i++) {
+            base64 += String.fromCharCode(picture.data[i]);
+        }
+
+        return 'data:' + picture.format + ';base64,' + window.btoa(base64);
     },
 };
 
