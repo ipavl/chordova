@@ -34,9 +34,16 @@ var app = {
                 app.songQueue.push(songData);
 
                 // Rewrite playlist with all songs
-                playlist.innerHTML = '<ul><li>' + $.map(app.songQueue, function(obj){
-                    return obj.title
+                playlist.innerHTML = '<ul><li>' + $.map(app.songQueue, function(obj, index){
+                    return '<button id="song-' + index + '">' + obj.artist + ' - ' + obj.title + '</button>';
                 }).join('</li><li>') + '</li></ul>';
+
+                // Reset listeners for playing songs from the playlist
+                $('button[id^="song-"]').click(function () {
+                    // Get the index for the selected song, which is after the last hyphen in the button id
+                    var index = parseInt(/[^-]*$/.exec(this.id)[0]);
+                    app.playSong(index);
+                });
 
                 // TODO: Improve how the first song is played
                 if (player.paused) {
@@ -58,6 +65,10 @@ var app = {
         np_artist.innerText = songData.artist;
         np_album.innerText = songData.album;
         np_year.innerText = songData.year;
+
+        $('.current-song').removeClass('current-song');
+        app.currentIndex = index;
+        $('#song-' + app.currentIndex).addClass('current-song');
 
         player.src = songData.path;
         player.play();
