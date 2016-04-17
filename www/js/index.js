@@ -126,6 +126,8 @@ var app = {
             }).join('</li><li>') + '</li></ul>';
 
         app.addPlaylistButtonListeners();
+
+        $('#song-' + app.currentIndex).addClass('current-song');
     },
 
     addPlaylistButtonListeners: function () {
