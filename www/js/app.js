@@ -34,6 +34,8 @@ var app = {
             if (queue.currentIndex === queue.songQueue.length - 1 && controls.repeatState === controls.repeatStates.NONE) {
                 queue.playSong(0);
                 player.pause();
+            } else if (controls.repeatState === controls.repeatStates.ONE) {
+                queue.playSong(queue.currentIndex);
             } else {
                 controls.next();
             }

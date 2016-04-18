@@ -13,14 +13,7 @@ var controls = {
 
     next: function () {
         try {
-            switch (controls.repeatState) {
-                case controls.repeatStates.ONE:
-                    queue.playSong(queue.currentIndex);
-                    break;
-                default:
-                    queue.playSong(++queue.currentIndex);
-                    break;
-            }
+            queue.playSong(++queue.currentIndex);
         } catch (e) {
             queue.currentIndex = 0;
             queue.playSong(queue.currentIndex);
@@ -29,14 +22,7 @@ var controls = {
 
     previous: function () {
         try {
-            switch (controls.repeatState) {
-                case controls.repeatStates.ONE:
-                    queue.playSong(queue.currentIndex);
-                    break;
-                default:
-                    queue.playSong(--queue.currentIndex);
-                    break;
-            }
+            queue.playSong(--queue.currentIndex);
         } catch (e) {
             queue.currentIndex = queue.songQueue.length - 1;
             queue.playSong(queue.currentIndex);
