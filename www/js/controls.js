@@ -59,8 +59,14 @@ var controls = {
             case controls.repeatStates.ALL:
             default:
                 controls.repeatState = controls.repeatStates.NONE;
-                repeat_state.innerText = '';
+                repeat_state.innerText = 'Off';
                 break;
         }
+    },
+
+    shuffle: function () {
+        queue.songQueue = utilities.shufflePlaylistArray(queue.songQueue);
+        queue.playSong(0);
+        ui.createPlaylistHTML();
     },
 };

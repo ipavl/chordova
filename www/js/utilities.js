@@ -22,4 +22,21 @@ var utilities = {
 
         return (isNaN(minutes) ? '--' : minutes) + ':' + (isNaN(seconds) ? '--' : seconds);
     },
+    
+    shufflePlaylistArray: function (array) {
+        var arrayLength = array.length, temp, rand;
+
+        // While there remain elements to shuffle
+        while (arrayLength) {
+            // Pick a remaining element
+            rand = Math.floor(Math.random() * arrayLength--);
+
+            // Swap it with the current element
+            temp = array[arrayLength];
+            array[arrayLength] = array[rand];
+            array[rand] = temp;
+        }
+
+        return array;
+    },
 };

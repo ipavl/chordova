@@ -58,6 +58,10 @@ var app = {
         $('#repeat').click(function () {
             controls.repeat();
         });
+
+        $('#shuffle').click(function () {
+            controls.shuffle();
+        });
     },
 };
 
