@@ -31,7 +31,12 @@ var app = {
         });
 
         player.addEventListener('ended', function () {
-            controls.next();
+            if (queue.currentIndex === queue.songQueue.length - 1 && controls.repeatState === controls.repeatStates.NONE) {
+                queue.playSong(0);
+                player.pause();
+            } else {
+                controls.next();
+            }
         });
 
         $('#pause').click(function () {
@@ -48,6 +53,10 @@ var app = {
 
         $('#prev').click(function () {
             controls.previous();
+        });
+
+        $('#repeat').click(function () {
+            controls.repeat();
         });
     },
 };
