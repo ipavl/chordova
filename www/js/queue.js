@@ -1,12 +1,24 @@
 var queue = {
     songQueue: [],
+    albumArtMap: {},
     currentIndex: 0,
+
+    getAlbumArt: function (tags) {
+        var hash = md5(tags.artist + tags.album);
+
+        // Process and store the album art if it's not already stored
+        if (!(hash in queue.albumArtMap)) {
+            queue.albumArtMap[hash] = utilities.createAlbumArtDataURI(tags.picture);
+        }
+
+        return hash;
+    },
 
     playSong: function (index) {
         var songData = queue.songQueue[index];
 
         // Update the Now Playing information for the current song
-        np_cover.innerHTML = '<img src="' + songData.cover + '" class="album-art" />';
+        np_cover.innerHTML = '<img src="' + queue.albumArtMap[songData.cover] + '" class="album-art" />';
         np_title.innerText = songData.title;
         np_artist.innerText = songData.artist;
         np_album.innerText = songData.album;
@@ -33,7 +45,7 @@ var queue = {
                     'artist': tags.artist,
                     'album': tags.album,
                     'year': tags.year,
-                    'cover': utilities.createAlbumArtDataURI(tags.picture),
+                    'cover': queue.getAlbumArt(tags),
                     'path': URL.createObjectURL(song)
                 };
 
