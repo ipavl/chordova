@@ -12,9 +12,7 @@ var ui = {
             }).join('</li><li>') + '</li></ul>';
 
         ui.addPlaylistButtonListeners();
-
-        $('#song-' + queue.currentIndex).addClass('current-song');
-        $('#delete-song-' + queue.currentIndex).addClass('current-song');
+        ui.highlightCurrentSong();
     },
 
     addPlaylistButtonListeners: function () {
@@ -34,6 +32,11 @@ var ui = {
             queue.deleteSong(index);
             ui.createPlaylistHTML();
         });
+    },
+
+    highlightCurrentSong: function () {
+        $('#song-' + queue.currentIndex).addClass('current-song');
+        $('#delete-song-' + queue.currentIndex).addClass('current-song');
     },
 
     updateCurrentTime: function () {

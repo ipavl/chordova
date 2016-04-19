@@ -17,9 +17,7 @@ var queue = {
 
         $('.current-song').removeClass('current-song');
         queue.currentIndex = index;
-        $('#song-' + queue.currentIndex).addClass('current-song');
-        $('#delete-song-' + queue.currentIndex).addClass('current-song');
-
+        ui.highlightCurrentSong();
 
         player.src = songData.path;
         player.play();
