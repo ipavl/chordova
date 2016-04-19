@@ -6,7 +6,7 @@ var queue = {
         var songData = queue.songQueue[index];
 
         // Update the Now Playing information for the current song
-        np_cover.innerHTML = '<img src="' + songData.cover + '" />';
+        np_cover.innerHTML = '<img src="' + songData.cover + '" class="album-art" />';
         np_title.innerText = songData.title;
         np_artist.innerText = songData.artist;
         np_album.innerText = songData.album;
@@ -18,6 +18,8 @@ var queue = {
         $('.current-song').removeClass('current-song');
         queue.currentIndex = index;
         $('#song-' + queue.currentIndex).addClass('current-song');
+        $('#delete-song-' + queue.currentIndex).addClass('current-song');
+
 
         player.src = songData.path;
         player.play();

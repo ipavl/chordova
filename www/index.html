@@ -17,6 +17,8 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/flexboxgrid.min.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>Chordova</title>
@@ -24,29 +26,40 @@
 
 <body>
 <div class="app">
-    <h1>Chordova</h1>
+    <div id="now_playing" class="row">
+        <div class="col-md-offset-3 col-md-3">
+            <span id="np_cover" class="img-responsive"></span>
+        </div>
 
-    <input id="file_select" name="files[]" type="file" accept="audio/*" multiple>
-    <audio id="player"></audio>
-
-    <span id="current_time">00:00</span>
-
-    <button id="pause" type="button"><i class="fa fa-pause"></i></button>
-    <button id="stop" type="button"><i class="fa fa-stop"></i></button>
-
-    <button id="prev" type="button"><i class="fa fa-backward"></i></button>
-    <button id="next" type="button"><i class="fa fa-forward"></i></button>
-
-    <button id="shuffle"><i class="fa fa-random"></i></button>
-    <button id="repeat"><i class="fa fa-repeat"></i> <span id="repeat_state">Off</span></button>
-
-    <div id="now_playing">
-        <div id="np_cover"></div>
-        <div id="np_title"></div>
-        <div id="np_artist"></div>
-        <div id="np_album"></div>
-        <div id="np_year"></div>
+        <div class="col-md-3">
+            <div id="np_title"></div>
+            <div id="np_artist"></div>
+            <div id="np_album"></div>
+            <div id="np_year"></div>
+        </div>
     </div>
+
+    <footer class="navbar-fixed-top">
+        <audio id="player"></audio>
+
+        <span class="playlist-controls">
+            <input id="file_select" name="files[]" type="file" accept="audio/*" multiple>
+            <button id="file_select_button"><i class="fa fa-plus"></i></button>
+            <button id="playlist_button"><i class="fa fa-list"></i></button>
+        </span>
+
+        <span class="player-controls">
+            <span id="current_time">00:00</span>
+            <button id="pause" type="button"><i class="fa fa-pause"></i></button>
+            <button id="stop" type="button"><i class="fa fa-stop"></i></button>
+
+            <button id="prev" type="button"><i class="fa fa-backward"></i></button>
+            <button id="next" type="button"><i class="fa fa-forward"></i></button>
+
+            <button id="shuffle"><i class="fa fa-random"></i></button>
+            <button id="repeat"><i class="fa fa-repeat"></i> <span id="repeat_state">Off</span></button>
+        </span>
+    </footer>
 
     <div id="playlist"></div>
 </div>

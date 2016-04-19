@@ -1,14 +1,20 @@
 var ui = {
     createPlaylistHTML: function () {
         // Rewrite playlist with all songs
-        playlist.innerHTML = '<ul><li>' + $.map(queue.songQueue, function (obj, index) {
-                return '<button id="song-' + index + '">' + obj.artist + ' - ' + obj.title + '</button>'
-                    + '<button id="delete-song-' + index + '">X</button>';
+        playlist.innerHTML = '<ul class="list-unstyled"><li>'
+            + $.map(queue.songQueue, function (obj, index) {
+                return '<button id="song-' + index + '" class="song-button">'
+                    + '<strong>' + obj.title + '</strong>'
+                    //+ '<br/>' // causes boxes to tear
+                    + ' - '
+                    + obj.artist + '</button>'
+                    + '<button id="delete-song-' + index + '" class="song-button"><i class="fa fa-close"></i></button>';
             }).join('</li><li>') + '</li></ul>';
 
         ui.addPlaylistButtonListeners();
 
         $('#song-' + queue.currentIndex).addClass('current-song');
+        $('#delete-song-' + queue.currentIndex).addClass('current-song');
     },
 
     addPlaylistButtonListeners: function () {

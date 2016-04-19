@@ -22,7 +22,7 @@ var app = {
     // deviceready Event Handler
     onDeviceReady: function () {
         // Listener to add selected files to the song queue
-        file_select.onchange = function() {
+        file_select.onchange = function () {
             queue.addSongs(this.files);
         };
 
@@ -39,6 +39,16 @@ var app = {
             } else {
                 controls.next();
             }
+        });
+
+        // Fake file select button
+        $('#file_select_button').click(function () {
+            // This will click the real file select input
+            $('#file_select').click();
+        });
+
+        $('#playlist_button').click(function () {
+            $('#playlist').toggle();
         });
 
         $('#pause').click(function () {
