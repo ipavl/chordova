@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../fonts/NotoSans-Regular.ttf');
+}
+
+html, body {
+    height: 100%;
+}
+
+.app {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+footer {
+    height: 5%;
+    padding: 10px;
+}
+
+button {
+    background-color: white;
+}
+
+button[id^='song-'] {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-right: none;
+    width: 95%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+button[id^='delete-song-'] {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-left: none;
+    width: 5%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.song-button {
+    height: 36px;
+}
+
+/* Hide file select input so we can customize it via another control */
+#file_select {
+    display: none;
+}
+
+.current-song {
+    background-color: bisque !important;
+}
+
+.album-art {
+    width: 300px;
+    height: 300px;
+}
+
+#now_playing {
+    height: 47.5%;
+    align-items: center;
+    margin: auto;
+
+    position: absolute;
+    top: 0;
+    bottom: 47.5%;
+    left: 0;
+    right: 0;
+}
+
+#np_title {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#np_artist,
+#np_album,
+#np_year {
+    font-size: x-large;
+}
+
+#playlist {
+    width: 100%;
+    height: 47.5%;
+    overflow-y: scroll;
+
+    position: absolute;
+    top: 52.5%; /* 100% - height */
+    margin: auto;
+}
+
+.playlist-controls {
+    float: left;
+}
+
+.player-controls {
+    float: right;
+}
