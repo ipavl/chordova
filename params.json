@@ -1,0 +1,6 @@
+{
+  "name": "Chordova",
+  "tagline": "A local audio file player for web and mobile built with Apache Cordova.",
+  "body": "### What is Chordova?\r\nChordova is a web-based audio player designed to play audio files you already have on your computer or mobile device. It uses [Apache Cordova](https://cordova.apache.org/) to target mobile devices as an app (so no internet connection is required), with the possibility of future mobile-specific functionality granted through Cordova plugins, but is also able to run as a static webpage to theoretically be usable on any platform with a web browser that supports HTML5 and JavaScript.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
