@@ -48,7 +48,14 @@ var app = {
         });
 
         $('#playlist_button').click(function () {
-            $('#playlist').toggle();
+            var playlistDiv = $('#playlist');
+            playlistDiv.toggle();
+
+            if (playlistDiv.is(':visible')) {
+                $('#now_playing').css({ bottom: '47.5%' });
+            } else {
+                $('#now_playing').css({ bottom: 0 });
+            }
         });
 
         $('#pause').click(function () {
