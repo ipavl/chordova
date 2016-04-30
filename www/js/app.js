@@ -51,10 +51,20 @@ var app = {
             var playlistDiv = $('#playlist');
             playlistDiv.toggle();
 
-            if (playlistDiv.is(':visible')) {
-                $('#now_playing').css({ bottom: '47.5%' });
+            if (window.matchMedia('(min-width: 768px)').matches) {
+                // Adjust the location of the now playing information if the playlist is showing on larger screens
+                if (playlistDiv.is(':visible')) {
+                    $('#now_playing').css({bottom: '47.5%'});
+                } else {
+                    $('#now_playing').css({bottom: 0});
+                }
             } else {
-                $('#now_playing').css({ bottom: 0 });
+                // Hide the now playing information if the playlist is showing on mobile
+                if (playlistDiv.is(':visible')) {
+                    $('#now_playing').hide();
+                } else {
+                    $('#now_playing').show();
+                }
             }
         });
 
