@@ -24,6 +24,7 @@ var app = {
         // Listener to add selected files to the song queue
         file_select.onchange = function () {
             queue.addSongs(this.files);
+            $('#welcome_message').hide();
         };
 
         player.addEventListener('timeupdate', function () {
@@ -42,7 +43,7 @@ var app = {
         });
 
         // Fake file select button
-        $('#file_select_button').click(function () {
+        $('#file_select_button, #welcome_message').click(function () {
             // This will click the real file select input
             $('#file_select').click();
         });

@@ -22,6 +22,16 @@ body {
     display: none;
 }
 
+#welcome_message {
+    font-size: xx-large;
+    color: darkgray;
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+    z-index: 999;
+}
+
 footer {
     height: 5%;
     padding: 10px;
