@@ -14,6 +14,12 @@ html, body {
 
 body {
     font-family: 'Noto Sans', sans-serif;
+    padding-top: 50px; /* for fixed navbar */
+}
+
+/* Hide file select input so we can customize it via another control */
+#file_select {
+    display: none;
 }
 
 footer {
@@ -49,30 +55,21 @@ button[id^='delete-song-'] {
     height: 36px;
 }
 
-/* Hide file select input so we can customize it via another control */
-#file_select {
-    display: none;
-}
-
 .current-song {
     background-color: bisque !important;
 }
 
-.album-art {
-    width: 300px;
-    height: 300px;
+.playlist-controls {
+    float: left;
+}
+
+.player-controls {
+    float: right;
 }
 
 #now_playing {
-    height: 47.5%;
     align-items: center;
     margin: auto;
-
-    position: absolute;
-    top: 0;
-    bottom: 47.5%;
-    left: 0;
-    right: 0;
 }
 
 #np_title {
@@ -88,18 +85,60 @@ button[id^='delete-song-'] {
 
 #playlist {
     width: 100%;
-    height: 47.5%;
+    height: 92%;
     overflow-y: scroll;
-
-    position: absolute;
-    top: 52.5%; /* 100% - height */
     margin: auto;
+    position: absolute;
+    top: 8%;
 }
 
-.playlist-controls {
-    float: left;
+.album-art {
+    width: 300px;
+    padding-bottom: 15px;
 }
 
-.player-controls {
-    float: right;
+@media screen and (min-width: 768px) {
+    .album-art {
+        width: 300px;
+        height: 300px;
+        padding-bottom: initial;
+    }
+
+    #now_playing {
+        height: 47.5%;
+
+        position: absolute;
+        top: 0;
+        bottom: 47.5%;
+        left: 0;
+        right: 0;
+    }
+
+    #playlist {
+        height: 47.5%;
+        top: 52.5%; /* 100% - height */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* Initially hide the playlist on mobile */
+    #playlist {
+        display: none;
+    }
+
+    #album_art_container,
+    #song_details_container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    button[id^='song-'] {
+        width: 90%;
+        padding-left: 10px;
+        text-align: left;
+    }
+
+    button[id^='delete-song-'] {
+        width: 10%;
+    }
 }
