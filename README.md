@@ -11,12 +11,11 @@ A demo can be found at https://ipavl.github.io/chordova/player/
 Build
 -----
 
-1. [Install Cordova](https://cordova.apache.org/#getstarted)
+* [Install Cordova](https://cordova.apache.org/#getstarted)
 
-2. From the project root, add the platform(s) you want to target:
+* From the project root, add the platform(s) you want to target (see `cordova platform list` for options - only the browser and Android have been tested so far):
 ```
 cordova platform add <platform>
 ```
-See `cordova platform list` for options - only the browser and Android have been tested so far
 
-3. Run the app with `cordova run <platform>` or `cordova serve`
+* Run the app with `cordova run <platform>` or `cordova serve`
