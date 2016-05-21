@@ -1,9 +1,11 @@
+// Plugins/libraries
+var jsmediatags = window.jsmediatags;
+var notification = window.plugin.notification.local;
+
 var utilities = window.utilities;
 var controls = window.controls;
 var ui = window.ui;
 var queue = window.queue;
-
-var jsmediatags = window.jsmediatags;
 
 var app = {
     // Application Constructor

@@ -33,6 +33,16 @@ var queue = {
 
         player.src = songData.path;
         player.play();
+
+        // Display a notification if not in the browser
+        if (typeof device !== 'undefined' && device.platform !== 'browser') {
+            notification.schedule({
+                title: songData.title,
+                text: songData.artist,
+                sound: null,
+                ongoing: true
+            });
+        }
     },
 
     addSong: function (song) {
