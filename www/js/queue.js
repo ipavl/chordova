@@ -16,16 +16,28 @@ var queue = {
 
     playSong: function (index) {
         var songData = queue.songQueue[index];
+        var songTitle = utilities.checkUndefinedString(songData.title);
+        var songArtist = utilities.checkUndefinedString(songData.artist);
+        var songAlbum = utilities.checkUndefinedString(songData.album);
+        var songYear = utilities.checkUndefinedString(songData.year);
 
         // Update the Now Playing information for the current song
         np_cover.innerHTML = '<img src="' + queue.albumArtMap[songData.cover] + '" class="album-art" />';
-        np_title.innerText = songData.title;
-        np_artist.innerText = songData.artist;
-        np_album.innerText = songData.album;
-        np_year.innerText = songData.year;
+        np_title.innerText = songTitle;
+        np_artist.innerText = songArtist;
+        np_album.innerText = songAlbum;
+        np_year.innerText = songYear;
 
         // Update the page title
-        document.title = songData.artist + ' - ' + songData.title + ' - Chordova';
+        if (songArtist !== '' && songTitle !== '') {
+            document.title = songArtist + ' - ' + songTitle + ' - Chordova';
+        } else if (songArtist !== '') {
+            document.title = songArtist + ' - Chordova';
+        } else if (songTitle !== '') {
+            document.title = songTitle + ' - Chordova';
+        } else {
+            document.title = 'Chordova';
+        }
 
         $('.current-song').removeClass('current-song');
         queue.currentIndex = index;

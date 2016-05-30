@@ -13,6 +13,10 @@ var utilities = {
         return 'data:' + picture.format + ';base64,' + window.btoa(base64);
     },
 
+    checkUndefinedString: function (string) {
+        return typeof string !== 'undefined' ? string : '';
+    },
+
     formatAudioDuration: function (seconds) {
         var minutes = Math.floor(seconds / 60);
 
